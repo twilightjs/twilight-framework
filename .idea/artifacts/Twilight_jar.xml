@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Twilight:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Twilight_jar</output-path>
+    <root id="archive" name="Twilight.jar">
+      <element id="module-output" name="Twilight" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javax.mail.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/postgresql-42.2.24.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

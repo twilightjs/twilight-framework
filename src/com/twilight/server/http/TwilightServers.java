@@ -1,0 +1,5 @@
+package com.twilight.server.http;
+
+public enum TwilightServers {
+    TWILIGHT_MULTITHREADING_SERVER, TWILIGHT_BLOCKING_SERVER, TWILIGHT_NON_BLOCKING_SERVER, TWILIGHT_XNIO_SERVER
+}
