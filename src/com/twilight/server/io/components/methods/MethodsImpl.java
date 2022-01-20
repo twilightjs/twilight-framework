@@ -1,6 +1,6 @@
 package com.twilight.server.io.components.methods;
 
-public interface Methods {
+public interface MethodsImpl {
     public static final String ALL = "ALL";
     public static final String GET = "GET";
     public static final String POST = "POST";

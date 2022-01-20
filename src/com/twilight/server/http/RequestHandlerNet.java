@@ -1,6 +1,6 @@
 package com.twilight.server.http;
 
-import com.twilight.server.dispatcher.handlers.HandlerSelector;
+import com.twilight.server.handler.HandlerSelector;
 import com.twilight.server.handler.Handler;
 import com.twilight.server.http.io.InputOutputExchanger;
 import com.twilight.server.http.io.InputOutputExchangerNetImplementation;

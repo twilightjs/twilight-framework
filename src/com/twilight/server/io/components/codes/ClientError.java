@@ -1,4 +1,4 @@
-package com.twilight.server.io.components.status.code;
+package com.twilight.server.io.components.codes;
 
 public interface ClientError {
     public static int BAD_REQUEST = 400;

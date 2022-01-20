@@ -1,10 +1,8 @@
-package com.twilight.server.dispatcher.handlers;
+package com.twilight.server.handler;
 
-import com.twilight.server.dispatcher.handlers.annotation.DefaultListener;
-import com.twilight.server.dispatcher.handlers.annotation.HttpMethod;
-import com.twilight.server.dispatcher.handlers.annotation.Listener;
-import com.twilight.server.handler.DefaultHandlerTwilight;
-import com.twilight.server.handler.Handler;
+import com.twilight.server.handler.annotation.DefaultListener;
+import com.twilight.server.handler.annotation.HttpMethod;
+import com.twilight.server.handler.annotation.Listener;
 import com.twilight.server.http.io.InputOutputExchanger;
 import com.twilight.server.io.request.HttpRequest;
 import com.twilight.server.io.response.HttpResponse;

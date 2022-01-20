@@ -1,6 +1,15 @@
 package com.twilight.server.io.components.builder;
 
-public abstract class ResponseBuilder implements Http {
+import com.twilight.server.io.components.codes.*;
+import com.twilight.server.io.components.methods.MethodsImpl;
+
+public abstract class ResponseBuilder {
+    public interface HttpCodes extends Informational, Success, Redirection, ClientError, ServerError {
+    }
+
+    public interface HttpMethods extends MethodsImpl {
+    }
+
     protected String response = "HTTP/1.1 ";
     protected String statusCode = "";
     protected String headers = "";

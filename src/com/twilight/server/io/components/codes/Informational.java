@@ -1,4 +1,4 @@
-package com.twilight.server.io.components.status.code;
+package com.twilight.server.io.components.codes;
 
 public interface Informational {
     public static int CONTINUE = 100;

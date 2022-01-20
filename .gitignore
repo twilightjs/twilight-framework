@@ -1,2 +1,5 @@
 test/
 *.log
+.idea/
+out/
+src/com/twilight/server/legacy/

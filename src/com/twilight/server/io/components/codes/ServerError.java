@@ -1,4 +1,4 @@
-package com.twilight.server.io.components.status.code;
+package com.twilight.server.io.components.codes;
 
 public interface ServerError {
     public static int INTERNAL_SERVER_ERROR = 500;

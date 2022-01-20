@@ -1,4 +1,4 @@
-package com.twilight.server.io.components.status.code;
+package com.twilight.server.io.components.codes;
 
 public interface Success {
     public static int OK = 200;
