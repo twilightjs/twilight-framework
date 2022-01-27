@@ -2,4 +2,6 @@ test/
 *.log
 .idea/
 out/
-src/com/twilight/server/legacy/
+src/main/java/com/twilight/server/legacy/
+Twilight.iml
+pom.xml
