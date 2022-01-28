@@ -2,6 +2,7 @@ testt/
 *.log
 .idea/
 out/
-src/main/java/com/twilight/server/legacy/
+testt/legacy/
 Twilight.iml
 pom.xml
+target/
