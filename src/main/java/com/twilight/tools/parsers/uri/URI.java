@@ -1,7 +1,11 @@
 package com.twilight.tools.parsers.uri;
 
-public interface URI {
-    public String getPath();
+import java.util.Map;
 
-    public boolean isPathEquals(String path);
+public interface URI {
+    String getPath();
+
+    Map<String, String> getParams();
+
+    boolean isPathEquals(String path);
 }

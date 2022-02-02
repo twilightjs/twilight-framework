@@ -50,11 +50,6 @@ public class HttpParser {
         return version;
     }
 
-    public Map getParams() {
-
-        return new HashMap();
-    }
-
 
     public Header[] getHeaders() {
         Headers headers = new MapHeaders();
