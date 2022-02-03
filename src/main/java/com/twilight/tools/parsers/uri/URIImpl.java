@@ -23,12 +23,13 @@ public class URIImpl implements URI {
     @Override
     public Map<String, String> getParams() {
         Map<String, String> map = new HashMap<>();
-        Matcher matcher = Pattern.compile("&\\w+=\\w+|\\?\\w+=\\w+").matcher(uri);
+        Matcher matcher = Pattern.compile("&\\w+=\\S+|\\?\\w+=\\S+").matcher(uri);
         while (matcher.find()) {
-            map.put(matcher.group().replaceFirst("=\\w+", "")
-                            .replaceFirst("[=?&]", ""),
-                    matcher.group().replaceFirst("&\\w+=|\\?\\w+=", "")
-                            .replaceFirst("[=?&]", ""));
+            System.out.println(matcher.group());
+            map.put(matcher.group().replaceFirst("=\\S+", "")
+                            .replaceFirst("[=?&]|#\\S+", ""),
+                    matcher.group().replaceFirst("&\\S+=|\\?\\S+=", "")
+                            .replaceFirst("[=?&]|#\\S+", ""));
         }
         return map;
     }
