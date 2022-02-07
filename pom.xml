@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.twilight</groupId>
+    <artifactId>twilight-framework</artifactId>
+    <version>1.1.1</version>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <archive>
+                        <!--Если надо конфигурировать манифест, то здесь-->
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!--путь к зависимостям относительно запускаемого jar файла-->
+                            <!--ВСЕ ЗАВИСИМОСТИ ДОЛЖНЫ БУДУТ ПОСТАВЛЯТЬСЯ С ТВОИМ jar приложением. -->
+                            <!--                            <classpathLayoutType>simple</classpathLayoutType>-->
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <developers>
+        <developer>
+            <id>SeRzZzJ</id>
+            <url>http://serzzzj.xyz</url>
+            <name>Romanyuk Sergey</name>
+            <email>jc10102016@gmail.com</email>
+            <properties>
+                <active>true</active>
+            </properties>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+</project>
