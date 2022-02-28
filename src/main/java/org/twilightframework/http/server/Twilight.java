@@ -1,24 +1,17 @@
 package org.twilightframework.http.server;
 
-import org.twilightframework.http.handler.Handler;
+import org.twilightframework.http.server.data.ServerData;
+import org.twilightframework.http.server.notification.NotificationBehavior;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
 
 public abstract class Twilight {
     protected final InetSocketAddress address;
-    protected final ArrayList<Handler> handlers;
-    protected NotificationBehavior notificationBehavior;
+    protected ServerData serverData;
 
     public Twilight(TwilightBuilder twilightBuilder, NotificationBehavior notificationBehavior) {
         this.address = twilightBuilder.getAddress();
-        this.handlers = twilightBuilder.getHandlers();
-        this.notificationBehavior = notificationBehavior;
-    }
-
-    public Twilight(TwilightBuilder twilightBuilder) {
-        this.address = twilightBuilder.getAddress();
-        this.handlers = twilightBuilder.getHandlers();
+        this.serverData = new ServerData(twilightBuilder.getHandlers(), notificationBehavior);
     }
 
     public static TwilightBuilder builder() {

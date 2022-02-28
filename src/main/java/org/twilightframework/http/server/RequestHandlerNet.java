@@ -1,37 +1,34 @@
 package org.twilightframework.http.server;
 
-import org.twilightframework.http.handler.Handler;
 import org.twilightframework.http.handler.HandlerSelector;
+import org.twilightframework.http.server.data.ServerData;
 import org.twilightframework.http.server.io.InputOutputExchanger;
 import org.twilightframework.http.server.io.InputOutputExchangerNetImplementation;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class RequestHandlerNet implements Runnable {
 
     private Socket socket;
-    private ArrayList<Handler> handlers;
-    private NotificationBehavior notificationBehavior;
+    private ServerData serverData;
 
-    public RequestHandlerNet(Socket socket, ArrayList<Handler> handlers, NotificationBehavior notificationBehavior) {
+    public RequestHandlerNet(Socket socket, ServerData serverData) {
         this.socket = socket;
-        this.handlers = handlers;
-        this.notificationBehavior = notificationBehavior;
+        this.serverData = serverData;
     }
 
     @Override
     public void run() {
         InputOutputExchanger inputOutputExchanger = new InputOutputExchangerNetImplementation(this.socket);
-        HandlerSelector handlerSelector = new HandlerSelector(this.handlers, inputOutputExchanger);
-        this.notificationBehavior.notifyHandler(handlerSelector.select(), inputOutputExchanger);
+        HandlerSelector handlerSelector = new HandlerSelector(serverData.getHandlers(), inputOutputExchanger);
+        serverData.getNotificationBehavior().notifyHandler(handlerSelector.select(), inputOutputExchanger);
         socketClose();
     }
 
     private void socketClose() {
         try {
-            this.socket.close();
+            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

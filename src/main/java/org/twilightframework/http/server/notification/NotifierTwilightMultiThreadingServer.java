@@ -1,4 +1,4 @@
-package org.twilightframework.http.server;
+package org.twilightframework.http.server.notification;
 
 import org.twilightframework.http.handler.Handler;
 import org.twilightframework.http.server.io.InputOutputExchanger;

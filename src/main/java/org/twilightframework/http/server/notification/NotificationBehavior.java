@@ -1,10 +1,10 @@
-package org.twilightframework.http.server;
+package org.twilightframework.http.server.notification;
 
 import org.twilightframework.http.handler.Handler;
 import org.twilightframework.http.server.io.InputOutputExchanger;
 
 public interface NotificationBehavior {
 
-    public void notifyHandler(Handler handler, InputOutputExchanger inputOutputExchanger);
+    void notifyHandler(Handler handler, InputOutputExchanger inputOutputExchanger);
 
 }

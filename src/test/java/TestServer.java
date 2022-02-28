@@ -7,8 +7,9 @@ public class TestServer {
         Twilight server = Twilight.builder()
                 .configure(TwilightServers.TWILIGHT_MULTITHREADING_SERVER)
                 .setListener("localhost", 80)
-                .addHandler(new TestHandler())
                 .addHandler(new TestDefaultHandler())
+                .addHandler(new TestHandler())
+                .addHandler(new TestHandlerNext())
                 .build();
         server.start();
     }

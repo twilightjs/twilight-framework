@@ -10,51 +10,36 @@ import org.twilightframework.http.servlet.response.HttpResponse;
 import org.twilightframework.tools.parsers.http.HttpParser;
 import org.twilightframework.tools.parsers.uri.URI;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class HandlerSelector {
-    private ArrayList<Handler> handlers;
+    private List<Handler> handlers;
     private HttpParser parser;
 
-    public HandlerSelector(ArrayList<Handler> handlers, InputOutputExchanger inputOutputExchanger) {
+    public HandlerSelector(List<Handler> handlers, InputOutputExchanger inputOutputExchanger) {
         this.handlers = handlers;
         this.parser = new HttpParser(inputOutputExchanger.getRequest());
     }
 
     public Handler select() {
-        Handler definedHandler = new DefaultHandlerTwilight();
-        for (Handler handler : handlers) {
-            if (isDefaultExecutor(handler)) {
-                definedHandler = handler;
-            }
-            if (isExecutor(handler)) {
-                definedHandler = handler;
-                break;
-            }
-        }
-        return definedHandler;
+        return handlers.stream()
+                .filter(this::isHandler)
+                .findAny()
+                .orElse(handlers.stream()
+                        .filter(this::isDefaultHandler)
+                        .findAny()
+                        .orElse(new DefaultHandlerTwilight()));
     }
 
-    private boolean isDefaultExecutor(Handler handler) {
-        boolean isDefaultExecutor = false;
-        try {
-            isDefaultExecutor = (getDefaultListener(handler) != null && isMethodEquals(getHttpMethodAnnotation(handler)) ||
-                    getDefaultListener(handler) != null && getHttpMethodAnnotation(handler).method().equals("ALL"));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        return isDefaultExecutor;
+    private boolean isHandler(Handler handler) {
+        return getListenerAnnotation(handler) != null && isPathEquals(this.parser.getURI(), getListenerAnnotation(handler)) && isMethodEquals(getHttpMethodAnnotation(handler));
     }
 
-    private boolean isExecutor(Handler handler) {
-        boolean isExecutor = false;
-        try {
-            isExecutor = getListenerAnnotation(handler) != null && isPathEquals(this.parser.getURI(), getListenerAnnotation(handler)) && isMethodEquals(getHttpMethodAnnotation(handler));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        return isExecutor;
+    private boolean isDefaultHandler(Handler handler) {
+        return (getDefaultListener(handler) != null && isMethodEquals(getHttpMethodAnnotation(handler)) ||
+                getDefaultListener(handler) != null && getHttpMethodAnnotation(handler).method().equals("ALL"));
     }
+
 
     private DefaultListener getDefaultListener(Handler handler) {
         return handler.getClass().getAnnotation(DefaultListener.class);
@@ -72,11 +57,16 @@ public class HandlerSelector {
     }
 
     private boolean isMethodEquals(HttpMethod method) {
-        return this.parser.getMethod().equals(method.method().toUpperCase());
+        return parser.getMethod().equals(method.method().toUpperCase());
     }
 
-    private HttpMethod getHttpMethodAnnotation(Handler handler) throws NoSuchMethodException {
-        return handler.getClass().getMethod("handleRequest", HttpRequest.class, HttpResponse.class).getAnnotation(HttpMethod.class);
+    private HttpMethod getHttpMethodAnnotation(Handler handler) {
+        HttpMethod method = null;
+        try {
+            method = handler.getClass().getMethod("handleRequest", HttpRequest.class, HttpResponse.class).getAnnotation(HttpMethod.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return method;
     }
-
 }
