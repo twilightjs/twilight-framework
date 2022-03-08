@@ -13,5 +13,5 @@ public abstract class HttpResponse {
 
     public abstract void write(ResponseBuilder responseBuilder);
 
-    public abstract ResponseBuilder getResponseBuilder();
+    public abstract ResponseBuilder builder();
 }

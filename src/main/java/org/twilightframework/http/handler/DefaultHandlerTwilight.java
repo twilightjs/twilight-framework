@@ -8,8 +8,8 @@ public class DefaultHandlerTwilight implements Handler {
     @Override
     public void handleRequest(HttpRequest request, HttpResponse response) {
         System.out.println(request.getHttpParser().getRequest());
-        response.write(response.getResponseBuilder()
-                .setStatusCode(HttpCodes.NOT_FOUND.get(), "NOT FOUND")
+        response.write(response.builder()
+                .setStatusCode(HttpCodes.NOT_FOUND, "NOT FOUND")
                 .setHeader("Connection", "close")
                 .build());
     }

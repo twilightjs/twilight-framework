@@ -20,7 +20,7 @@ public class HttpResponseImplementation extends HttpResponse {
     }
 
     @Override
-    public ResponseBuilder getResponseBuilder() {
+    public ResponseBuilder builder() {
         return new ResponseBuilderImplementation();
     }
 }

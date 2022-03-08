@@ -11,8 +11,8 @@ public class TestHandlerAPI implements Handler {
     @Override
     @HttpMethod(HttpMethods.GET)
     public void handleRequest(HttpRequest request, HttpResponse response) {
-        response.write(response.getResponseBuilder()
-                .setStatusCode(HttpCodes.OK.get(), "OK")
+        response.write(response.builder()
+                .setStatusCode(HttpCodes.OK, "OK")
                 .setHeader("Content-Type", "text/html; charset=utf-8")
                 .setHeader("Connection", "close")
                 .setMessageBody("api OK")

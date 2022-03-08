@@ -12,8 +12,8 @@ public class TestDefaultHandler implements Handler {
     @HttpMethod(HttpMethods.ALL)
     public void handleRequest(HttpRequest request, HttpResponse response) {
         System.out.println(request.getHttpParser().getRequest());
-        response.write(response.getResponseBuilder()
-                .setStatusCode(HttpCodes.OK.get(), "OK")
+        response.write(response.builder()
+                .setStatusCode(HttpCodes.OK, "OK")
                 .setHeader("Content-Type", "text/plain; charset=utf-8")
                 .setHeader("Connection", "close")
                 .setMessageBody("default OK")
