@@ -1,5 +1,7 @@
 package org.twilightframework.http.servlet.components.builder;
 
+import org.twilightframework.http.servlet.components.codes.HttpCodes;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -13,20 +15,26 @@ public class ResponseBuilderImplementation extends ResponseBuilder {
     }
 
     @Override
+    public ResponseBuilder setStatusCode(HttpCodes statusCode, String explanatoryPhrase) {
+        this.statusCode = String.join(" ", String.valueOf(statusCode.get()), explanatoryPhrase) + "\n" + "Server: Twilight";
+        return this;
+    }
+
+    @Override
     public ResponseBuilder setHeader(String parameter, String value) {
-        this.headers += String.join(": ", parameter, value) + "\n";
+        headers += String.join(": ", parameter, value) + "\n";
         return this;
     }
 
     @Override
     public ResponseBuilder setMessageBody(String messageBody) {
-        this.body = messageBody.getBytes(StandardCharsets.UTF_8);
+        body = messageBody.getBytes(StandardCharsets.UTF_8);
         return this;
     }
 
     @Override
     public ResponseBuilder setFile(String path) {
-        this.body = triedSetFile(path);
+        body = triedSetFile(path);
         return this;
     }
 
@@ -42,7 +50,7 @@ public class ResponseBuilderImplementation extends ResponseBuilder {
 
     @Override
     public ResponseBuilder build() {
-        this.response += String.join("\n", this.statusCode, this.headers, "");
+        response += String.join("\n", this.statusCode, this.headers, "");
         return this;
     }
 }

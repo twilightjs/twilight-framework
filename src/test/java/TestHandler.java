@@ -1,20 +1,21 @@
 import org.twilightframework.http.handler.Handler;
 import org.twilightframework.http.handler.annotation.HttpMethod;
 import org.twilightframework.http.handler.annotation.Listener;
-import org.twilightframework.http.servlet.components.builder.ResponseBuilder;
+import org.twilightframework.http.servlet.components.codes.HttpCodes;
+import org.twilightframework.http.servlet.components.methods.HttpMethods;
 import org.twilightframework.http.servlet.request.HttpRequest;
 import org.twilightframework.http.servlet.response.HttpResponse;
 
-@Listener(uri = "/")
+@Listener("/")
 public class TestHandler implements Handler {
     @Override
-    @HttpMethod(method = ResponseBuilder.HttpMethods.GET)
+    @HttpMethod(HttpMethods.GET)
     public void handleRequest(HttpRequest request, HttpResponse response) {
         response.write(response.getResponseBuilder()
-                .setStatusCode(ResponseBuilder.HttpCodes.OK, "OK")
+                .setStatusCode(HttpCodes.OK.get(), "OK")
                 .setHeader("Content-Type", "text/html; charset=utf-8")
                 .setHeader("Connection", "close")
-                .setFile("D:\\portfolio-v1.5\\index.html")
+                .setFile("index OK")
                 .build());
     }
 }

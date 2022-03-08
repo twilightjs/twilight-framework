@@ -9,7 +9,7 @@ public class TestServer {
                 .setListener("localhost", 80)
                 .addHandler(new TestDefaultHandler())
                 .addHandler(new TestHandler())
-                .addHandler(new TestHandlerNext())
+                .addHandler(new TestHandlerAPI())
                 .build();
         server.start();
     }

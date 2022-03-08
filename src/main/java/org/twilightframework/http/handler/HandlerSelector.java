@@ -32,12 +32,14 @@ public class HandlerSelector {
     }
 
     private boolean isHandler(Handler handler) {
-        return getListenerAnnotation(handler) != null && isPathEquals(this.parser.getURI(), getListenerAnnotation(handler)) && isMethodEquals(getHttpMethodAnnotation(handler));
+        return (getListenerAnnotation(handler) != null &&
+                isPathEquals(this.parser.getURI(), getListenerAnnotation(handler)) &&
+                isMethodEquals(getHttpMethodAnnotation(handler)));
     }
 
     private boolean isDefaultHandler(Handler handler) {
         return (getDefaultListener(handler) != null && isMethodEquals(getHttpMethodAnnotation(handler)) ||
-                getDefaultListener(handler) != null && getHttpMethodAnnotation(handler).method().equals("ALL"));
+                getDefaultListener(handler) != null && getHttpMethodAnnotation(handler).value().get().equals("ALL"));
     }
 
 
@@ -49,7 +51,7 @@ public class HandlerSelector {
 //        System.out.println("Path: " + uri.getPath());
 //        System.out.println("Listener: " + listener.uri());
 //        System.out.println("Equals: " + uri.getPath().equals(listener.uri()));
-        return uri.getPath().equals(listener.uri());
+        return uri.getPath().equals(listener.value());
     }
 
     private Listener getListenerAnnotation(Handler handler) {
@@ -57,7 +59,7 @@ public class HandlerSelector {
     }
 
     private boolean isMethodEquals(HttpMethod method) {
-        return parser.getMethod().equals(method.method().toUpperCase());
+        return parser.getMethod().equals(method.value().get().toUpperCase());
     }
 
     private HttpMethod getHttpMethodAnnotation(Handler handler) {
@@ -67,6 +69,12 @@ public class HandlerSelector {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+        isHttpMethod(method);
         return method;
+    }
+
+    private void isHttpMethod(HttpMethod method) {
+        if (method == null)
+            throw new IllegalArgumentException("The handler did not specify an http method to listen on, specify @AlternativeHttpMethod or select an existing one from HttpMethods.");
     }
 }

@@ -1,21 +1,16 @@
 package org.twilightframework.http.servlet.components.builder;
 
-import org.twilightframework.http.servlet.components.codes.*;
-import org.twilightframework.http.servlet.components.methods.MethodsContent;
+import org.twilightframework.http.servlet.components.codes.HttpCodes;
 
 public abstract class ResponseBuilder {
-    public interface HttpCodes extends CodesContent {
-    }
-
-    public interface HttpMethods extends MethodsContent {
-    }
-
     protected String response = "HTTP/1.1 ";
     protected String statusCode = "";
     protected String headers = "";
     protected byte[] body;
 
     public abstract ResponseBuilder setStatusCode(int statusCode, String explanatoryPhrase);
+
+    public abstract ResponseBuilder setStatusCode(HttpCodes statusCode, String explanatoryPhrase);
 
     public abstract ResponseBuilder setHeader(String parameter, String value);
 
