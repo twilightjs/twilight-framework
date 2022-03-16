@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class URIImpl implements URI {
+public class URIParser {
     private static String uri;
 
-    public URIImpl(String uri) {
-        URIImpl.uri = uri;
+    public URIParser(String uri) {
+        URIParser.uri = uri;
     }
 
     public String getPath() {
@@ -19,8 +19,7 @@ public class URIImpl implements URI {
         if (path.length() == 0) path = new StringBuilder("/");
         return path.toString();
     }
-
-    @Override
+    
     public Map<String, String> getParams() {
         Map<String, String> map = new HashMap<>();
         Matcher matcher = Pattern.compile("&\\w+=\\S+|\\?\\w+=\\S+").matcher(uri);

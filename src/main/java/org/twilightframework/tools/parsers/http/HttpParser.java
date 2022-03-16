@@ -3,8 +3,8 @@ package org.twilightframework.tools.parsers.http;
 import org.twilightframework.tools.parsers.headers.Header;
 import org.twilightframework.tools.parsers.headers.Headers;
 import org.twilightframework.tools.parsers.headers.MapHeaders;
-import org.twilightframework.tools.parsers.uri.URI;
-import org.twilightframework.tools.parsers.uri.URIImpl;
+import org.twilightframework.tools.parsers.uri.URIParser;
+
 
 
 import java.util.regex.Matcher;
@@ -28,8 +28,8 @@ public class HttpParser {
         return method;
     }
 
-    public URI getURI() {
-        return new URIImpl(findURI());
+    public URIParser getURI() {
+        return new URIParser(findURI());
     }
 
     private String findURI() {

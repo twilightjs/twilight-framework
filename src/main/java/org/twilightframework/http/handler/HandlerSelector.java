@@ -8,7 +8,7 @@ import org.twilightframework.http.server.io.InputOutputExchanger;
 import org.twilightframework.http.servlet.request.HttpRequest;
 import org.twilightframework.http.servlet.response.HttpResponse;
 import org.twilightframework.tools.parsers.http.HttpParser;
-import org.twilightframework.tools.parsers.uri.URI;
+import org.twilightframework.tools.parsers.uri.URIParser;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class HandlerSelector {
         return handler.getClass().getAnnotation(DefaultListener.class);
     }
 
-    private boolean isPathEquals(URI uri, Listener listener) {
+    private boolean isPathEquals(URIParser uri, Listener listener) {
 //        System.out.println("Path: " + uri.getPath());
 //        System.out.println("Listener: " + listener.uri());
 //        System.out.println("Equals: " + uri.getPath().equals(listener.uri()));
