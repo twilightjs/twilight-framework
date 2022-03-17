@@ -25,8 +25,8 @@ public class TwilightMultiThreadingServer extends Twilight {
         while (true) threadPool.execute(() -> {
             Socket socket = configureSocket(serverSocket);
             InputOutputExchanger inputOutputExchanger = new InputOutputExchangerNetImplementation(socket);
-            HandlerSelector handlerSelector = new HandlerSelector(serverData.getHandlers(), inputOutputExchanger);
-            serverData.getNotificationBehavior().notifyHandler(handlerSelector.select(), inputOutputExchanger);
+            HandlerSelector handlerSelector = new HandlerSelector(serverData.handlers(), inputOutputExchanger);
+            serverData.notificationBehavior().notifyHandler(handlerSelector.select(), inputOutputExchanger);
             socketClose(socket);
         });
     }

@@ -15,7 +15,7 @@ public class TestHandler implements Handler {
                 .setStatusCode(HttpCodes.OK, "OK")
                 .setHeader("Content-Type", "text/html; charset=utf-8")
                 .setHeader("Connection", "close")
-                .setFile("index OK")
+                .setMessageBody("index OK")
                 .build());
     }
 }

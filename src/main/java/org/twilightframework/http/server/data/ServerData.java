@@ -7,13 +7,13 @@ import java.util.List;
 
 public record ServerData(List<Handler> handlers,
                          NotificationBehavior notificationBehavior) {
-
-    public List<Handler> getHandlers() {
-        return handlers;
-    }
-
-
-    public NotificationBehavior getNotificationBehavior() {
-        return notificationBehavior;
-    }
+//
+//    public List<Handler> getHandlers() {
+//        return handlers;
+//    }
+//
+//
+//    public NotificationBehavior getNotificationBehavior() {
+//        return notificationBehavior;
+//    }
 }

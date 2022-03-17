@@ -21,8 +21,8 @@ public class RequestHandlerNet implements Runnable {
     @Override
     public void run() {
         InputOutputExchanger inputOutputExchanger = new InputOutputExchangerNetImplementation(this.socket);
-        HandlerSelector handlerSelector = new HandlerSelector(serverData.getHandlers(), inputOutputExchanger);
-        serverData.getNotificationBehavior().notifyHandler(handlerSelector.select(), inputOutputExchanger);
+        HandlerSelector handlerSelector = new HandlerSelector(serverData.handlers(), inputOutputExchanger);
+        serverData.notificationBehavior().notifyHandler(handlerSelector.select(), inputOutputExchanger);
         socketClose();
     }
 
