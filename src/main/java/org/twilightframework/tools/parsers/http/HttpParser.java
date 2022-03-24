@@ -1,12 +1,9 @@
 package org.twilightframework.tools.parsers.http;
 
-import org.twilightframework.tools.parsers.headers.Header;
-import org.twilightframework.tools.parsers.headers.Headers;
-import org.twilightframework.tools.parsers.headers.MapHeaders;
 import org.twilightframework.tools.parsers.uri.URIParser;
 
-
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +19,7 @@ public class HttpParser {
     }
 
     public String getMethod() {
-        final Matcher matcher = Pattern.compile("[A-Z]+").matcher(request);
+        Matcher matcher = Pattern.compile("[A-Z]+").matcher(request);
         String method = " ";
         if (matcher.find()) method = matcher.group().replace(" ", "");
         return method;
@@ -34,7 +31,7 @@ public class HttpParser {
 
     private String findURI() {
         String uri = "/?#";
-        final Matcher matcher = Pattern.compile(getMethod() + ".+" + getVersion()).matcher(request);
+        Matcher matcher = Pattern.compile(getMethod() + ".+" + getVersion()).matcher(request);
         if (matcher.find())
             uri = matcher.group()
                     .replaceFirst(getMethod(), "")
@@ -43,16 +40,16 @@ public class HttpParser {
     }
 
     public String getVersion() {
-        final Matcher matcher = Pattern.compile(" [A-Z]+/[0-9].[0-9]|[A-Z]+/[0-9].[0-9]").matcher(request);
+        Matcher matcher = Pattern.compile(" [A-Z]+/[0-9].[0-9]|[A-Z]+/[0-9].[0-9]").matcher(request);
         String version = " ";
         if (matcher.find()) version = matcher.group().replace(" ", "");
         return version;
     }
 
 
-    public Header[] getHeaders() {
-        Headers headers = new MapHeaders();
-        final Matcher matcher = Pattern.compile("\\S+: .+|\n", Pattern.MULTILINE).matcher(request);
+    public Map<String, String> getHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        Matcher matcher = Pattern.compile("\\S+: .+|\n", Pattern.MULTILINE).matcher(request);
         int count = 0;
         while (matcher.find()) {
             if (matcher.group().equals("\n")) count++;
@@ -62,11 +59,11 @@ public class HttpParser {
             }
             if (count == 2) break;
         }
-        return headers.getHeaders();
+        return headers;
     }
 
     public String getBody() {
-        final Matcher matcher = Pattern.compile(".+|\n", Pattern.MULTILINE).matcher(request);
+        Matcher matcher = Pattern.compile(".+|\n", Pattern.MULTILINE).matcher(request);
         StringBuilder body = new StringBuilder();
         int count = 0;
         boolean messageBody = false;

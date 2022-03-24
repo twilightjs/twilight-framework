@@ -1,8 +1,5 @@
 package org.twilightframework.http.server;
 
-import org.twilightframework.http.handler.HandlerSelector;
-import org.twilightframework.http.server.io.InputOutputExchanger;
-import org.twilightframework.http.server.io.InputOutputExchangerNetImplementation;
 import org.twilightframework.http.server.notification.NotificationBehavior;
 
 import java.io.IOException;
@@ -22,13 +19,7 @@ public class TwilightMultiThreadingServer extends Twilight {
     @Override
     public void start() {
         ServerSocket serverSocket = configureServerSocket();
-        while (true) threadPool.execute(() -> {
-            Socket socket = configureSocket(serverSocket);
-            InputOutputExchanger inputOutputExchanger = new InputOutputExchangerNetImplementation(socket);
-            HandlerSelector handlerSelector = new HandlerSelector(serverData.handlers(), inputOutputExchanger);
-            serverData.notificationBehavior().notifyHandler(handlerSelector.select(), inputOutputExchanger);
-            socketClose(socket);
-        });
+        while (true) threadPool.execute(new MultiThreadingRunnable(configureSocket(serverSocket), serverData));
     }
 
     private ServerSocket configureServerSocket() {
@@ -53,13 +44,5 @@ public class TwilightMultiThreadingServer extends Twilight {
             e.printStackTrace();
         }
         return socket;
-    }
-
-    private void socketClose(Socket socket) {
-        try {
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

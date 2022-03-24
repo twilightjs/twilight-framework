@@ -33,8 +33,7 @@ public class TwilightBlockingServer extends Twilight {
         try {
             serverSocketChannel = ServerSocketChannel
                     .open()
-                    .bind(address)
-                    .setOption(StandardSocketOptions.SO_RCVBUF, Integer.MAX_VALUE);
+                    .bind(address);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +45,6 @@ public class TwilightBlockingServer extends Twilight {
         try {
             socketChannel = serverSocketChannel
                     .accept()
-                    .setOption(StandardSocketOptions.SO_SNDBUF, Integer.MAX_VALUE)
                     .setOption(StandardSocketOptions.SO_REUSEADDR, true);
         } catch (IOException e) {
             e.printStackTrace();

@@ -20,7 +20,7 @@ public class InputOutputExchangerNetImplementation extends InputOutputExchanger 
         try {
             output = new BufferedOutputStream(this.socket.getOutputStream());
             for (byte[] buffer : buffers) {
-                if(buffer == null) continue;
+                if (buffer == null) continue;
                 output.write(buffer);
             }
             output.flush();

@@ -8,12 +8,12 @@ import org.twilightframework.http.server.io.InputOutputExchangerNetImplementatio
 import java.io.IOException;
 import java.net.Socket;
 
-public class RequestHandlerNet implements Runnable {
+public class MultiThreadingRunnable implements Runnable {
 
     private Socket socket;
     private ServerData serverData;
 
-    public RequestHandlerNet(Socket socket, ServerData serverData) {
+    public MultiThreadingRunnable(Socket socket, ServerData serverData) {
         this.socket = socket;
         this.serverData = serverData;
     }
